@@ -2,9 +2,11 @@ package hw18;
 
 import hw17.BaseTest;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -18,18 +20,18 @@ public class DiscussedGoodsTest extends BaseTest {
         WebElement closeCross = driver.findElement(By.xpath("//span[@class='exponea-close-cross']"));
         closeCross.click();
 
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        Thread.sleep(5000);
-        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        Thread.sleep(5000);
-        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        int t = driver.findElements(By.xpath("//h2[normalize-space() = 'Найбільш обговорювані товари']/following-sibling::button")).size();
+
+        do {
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+            t++;
+        } while (t < 0);
 
         WebElement showMore = driver.findElement(By.xpath("//h2[normalize-space() = 'Найбільш обговорювані товари']/following-sibling::button"));
-        jse.executeScript("arguments[0].scrollIntoView();", showMore);
-
         showMore.click();
     }
+
 
     @Test
     public void printDiscussedGoods() {
