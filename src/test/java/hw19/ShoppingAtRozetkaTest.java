@@ -1,0 +1,45 @@
+package hw19;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.Properties;
+
+public class ShoppingAtRozetkaTest extends BaseTest {
+
+
+    @Test
+    public void shoppingAtRozetkaTest() throws IOException, InterruptedException {
+
+        HomePage homePage = launchRozetka();
+        SearchResultsPage searchResultsPage = new SearchResultsPage(driver);
+        ProductPage productPage = new ProductPage(driver);
+        CartPage cartPage = new CartPage(driver);
+
+        Properties prop = new Properties();
+        FileInputStream fis = new FileInputStream("src/test/resources/products.properties");
+        prop.load(fis);
+
+        String products = prop.getProperty("products");
+        String[] productNames = products.split(", ");
+
+        for (String productName : productNames) {
+            homePage.clickSearch(productName.trim());
+            searchResultsPage.clickThirdProduct();
+            productPage.addToCart();
+            driver.navigate().back();
+            homePage.clearSearch();
+        }
+
+        cartPage.clickCartButton();
+        Thread.sleep(5000);
+        cartPage.checkNrItems();
+        cartPage.checkTitles();
+    }
+}

@@ -30,3 +30,6 @@ hs_err_pid*
 
 # My project #
 ns
+
+# Draft #
+/src/test/java/hw19old/
