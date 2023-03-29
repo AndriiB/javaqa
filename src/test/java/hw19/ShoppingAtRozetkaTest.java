@@ -16,7 +16,7 @@ import java.util.Properties;
 public class ShoppingAtRozetkaTest extends BaseTest {
 
 
-    @Test(invocationCount = 5)
+    @Test
     public void shoppingAtRozetkaTest() throws IOException, InterruptedException {
 
         HomePage homePage = launchRozetka();

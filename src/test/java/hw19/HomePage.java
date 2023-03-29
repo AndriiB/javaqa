@@ -1,5 +1,6 @@
 package hw19;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,9 +19,11 @@ public class HomePage extends BasePage {
 
 
     public void clickSearch(String productName) {
-            searchBar.sendKeys(productName);
-            searchSubmit.click();
-        }
+        searchBar.sendKeys(productName);
+
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("arguments[0].click();", searchSubmit);
+    }
 
     public void clearSearch() {
         searchBar.clear();
