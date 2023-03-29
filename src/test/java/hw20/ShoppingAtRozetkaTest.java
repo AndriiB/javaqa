@@ -1,22 +1,19 @@
-package hw19;
+package hw20;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.Instant;
 import java.util.Properties;
 
 public class ShoppingAtRozetkaTest extends BaseTest {
 
 
-    @Test(invocationCount = 5)
+    @Test
     public void shoppingAtRozetkaTest() throws IOException, InterruptedException {
 
         HomePage homePage = launchRozetka();
@@ -41,7 +38,6 @@ public class ShoppingAtRozetkaTest extends BaseTest {
 
         cartPage.clickCartButton();
 
-        Thread.sleep(5000);
 
         //Checking that the cart contains equal number of items as the properties file
         Assert.assertEquals(productNames.length, cartPage.cartItems.size());
@@ -57,5 +53,6 @@ public class ShoppingAtRozetkaTest extends BaseTest {
             }
             Assert.assertTrue(found, "Product name '" + productName + "' not found in titles.");
         }
+
     }
 }
