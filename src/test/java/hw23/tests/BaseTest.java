@@ -31,9 +31,9 @@ public class BaseTest {
         driver.get("https://rozetka.com.ua/");
         mainPage = new MainPage(driver);
     }
-//
-//    @AfterMethod
-//    public void tearDown() {
-//        driver.quit();
-//    }
+
+    @AfterMethod
+    public void tearDown() {
+       driver.quit();
+   }
 }
